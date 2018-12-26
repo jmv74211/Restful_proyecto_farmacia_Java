@@ -1,26 +1,41 @@
-package jmv74211.DSS_P4.models;
+package jmv74211.DSS_P4.models.Users;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "User")
 public class User {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "userId")
 	private int userId;
 	
+	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "surnames")
 	private String surnames;
 	
+	@Column(name = "birthday")
 	private String birthday;
 
 	public User(){
 		
 	}
 	
-	public User(int userId, String email, String password, String name, String surnames, String birthday) {
-		super();
-		this.userId = userId;
+	public User(String email, String password, String name, String surnames, String birthday) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -75,6 +90,7 @@ public class User {
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
+	
 
 	@Override
 	public String toString() {

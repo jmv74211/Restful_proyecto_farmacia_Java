@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +17,7 @@ public class Pharmacy implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
@@ -31,8 +34,7 @@ public class Pharmacy implements Serializable {
 		
 	}
 	
-	public Pharmacy(int id, String name, double latitude, double length) {
-		this.id = id;
+	public Pharmacy(String name, double latitude, double length) {
 		this.name = name;
 		this.latitude = latitude;
 		this.length = length;
