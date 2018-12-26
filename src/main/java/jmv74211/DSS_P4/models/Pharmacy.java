@@ -27,6 +27,10 @@ public class Pharmacy implements Serializable {
 	@Column(name = "length")
 	private double length;
 	
+	public Pharmacy(){
+		
+	}
+	
 	public Pharmacy(int id, String name, double latitude, double length) {
 		this.id = id;
 		this.name = name;

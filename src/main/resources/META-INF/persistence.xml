@@ -16,7 +16,7 @@
 			
 			<!-- https://docs.jboss.org/hibernate/core/3.5/api/org/hibernate/dialect/package-summary.html -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
 		</properties>
 	</persistence-unit>
 
