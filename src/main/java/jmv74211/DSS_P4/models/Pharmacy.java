@@ -2,12 +2,20 @@ package jmv74211.DSS_P4.models;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import jmv74211.DSS_P4.models.Users.User;
+
+import jmv74211.DSS_P4.models.Users.Manager;
 
 
 @Entity
@@ -18,8 +26,8 @@ public class Pharmacy implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "pharmacyId")
+	private int pharmacyId;
 	
 	@Column(name = "name")
 	private String name;
@@ -30,22 +38,27 @@ public class Pharmacy implements Serializable {
 	@Column(name = "length")
 	private double length;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userManagerId")
+	private Manager manager;
+	
 	public Pharmacy(){
-		
+	
 	}
 	
-	public Pharmacy(String name, double latitude, double length) {
+	public Pharmacy(String name, double latitude, double length, Manager manager) {
 		this.name = name;
 		this.latitude = latitude;
 		this.length = length;
+		this.manager = manager;
 	}
 
 	public int getId() {
-		return id;
+		return pharmacyId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.pharmacyId = id;
 	}
 
 	public String getName() {
@@ -71,10 +84,27 @@ public class Pharmacy implements Serializable {
 	public void setLength(double length) {
 		this.length = length;
 	}
+	
+
+	public int getPharmacyId() {
+		return pharmacyId;
+	}
+
+	public void setPharmacyId(int pharmacyId) {
+		this.pharmacyId = pharmacyId;
+	}
+
+	public User getManager() {
+		return this.manager;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
 
 	@Override
 	public String toString() {
-		return "Pharmacy [id=" + id + ", name=" + name + ", latitude=" + latitude + ", length=" + length + "]";
+		return "Pharmacy [id=" + pharmacyId + ", name=" + name + ", latitude=" + latitude + ", length=" + length + "]";
 	}
 	
 	

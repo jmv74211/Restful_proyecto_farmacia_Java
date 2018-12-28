@@ -33,9 +33,9 @@ public class TestPharmacy {
 		emf = Persistence.createEntityManagerFactory("app");
 		manager = emf.createEntityManager();
 		
-		Pharmacy p1 = new Pharmacy(1,"Farmacia 1", 137.15, 135.12);
-		Pharmacy p2 = new Pharmacy(2,"Farmacia 2", 127.15, 151.12);
-		Pharmacy p3 = new Pharmacy(3,"Farmacia 3", 117.15, 158.12);
+		Pharmacy p1 = new Pharmacy("Farmacia 1", 137.15, 135.12);
+		Pharmacy p2 = new Pharmacy("Farmacia 2", 127.15, 151.12);
+		Pharmacy p3 = new Pharmacy("Farmacia 3", 117.15, 158.12);
 		
 		manager.getTransaction().begin();
 	

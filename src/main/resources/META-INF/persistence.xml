@@ -7,16 +7,29 @@
 	<persistence-unit name="app">
 	
 		<class>jmv74211.DSS_P4.models.Pharmacy</class>
+		<class>jmv74211.DSS_P4.models.Users.User</class>
+		<class>jmv74211.DSS_P4.models.Users.Manager</class>
+		<class>jmv74211.DSS_P4.models.Users.Customer</class>
+		<class>jmv74211.DSS_P4.models.Users.Administrator</class>
 	
 		<properties>
+		
+			<property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://127.0.0.1/dss" />
+            <property name="javax.persistence.jdbc.user" value="dss" />
+			<property name="javax.persistence.jdbc.password" value="pwddss" />
+		
+			<!--
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/test" />
 			<property name="javax.persistence.jdbc.user" value="sa" />
 			<property name="javax.persistence.jdbc.password" value="" />
-			
-			<!-- https://docs.jboss.org/hibernate/core/3.5/api/org/hibernate/dialect/package-summary.html -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-			<!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+			-->
+		
+			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" /> -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB53Dialect" />
+	
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
 	</persistence-unit>
 

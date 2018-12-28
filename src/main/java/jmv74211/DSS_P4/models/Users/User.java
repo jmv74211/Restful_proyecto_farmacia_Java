@@ -1,14 +1,22 @@
 package jmv74211.DSS_P4.models.Users;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import jmv74211.DSS_P4.models.Pharmacy;
 
 @Entity
 @Table(name = "User")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class User {
 	
 	@Id
@@ -91,7 +99,6 @@ public class User {
 		this.birthday = birthday;
 	}
 	
-
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
