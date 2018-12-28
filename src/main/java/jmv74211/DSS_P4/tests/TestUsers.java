@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import jmv74211.DSS_P4.models.Department;
 import jmv74211.DSS_P4.models.Pharmacy;
 import jmv74211.DSS_P4.models.Users.Administrator;
 import jmv74211.DSS_P4.models.Users.Customer;
@@ -64,6 +65,19 @@ public class TestUsers {
 		
 		Administrator userAdmin1 = new Administrator("admin1@gmail.com", "pwddss", "Jonathan", "Martín Valera", "1993-01-12");
 		manager.persist(userAdmin1);
+		
+		// DEPARTAMENTOS
+		Department dep1 = new Department("MEDICINES");
+		Department dep2 = new Department("HYGIENE");
+		Department dep3 = new Department("INFANTIL");
+		Department dep4 = new Department("COSMETICS");
+		Department dep5 = new Department("PERFUMES");
+		
+		manager.persist(dep1);
+		manager.persist(dep2);
+		manager.persist(dep3);
+		manager.persist(dep4);
+		manager.persist(dep5);
 		
 		manager.getTransaction().commit();
 		

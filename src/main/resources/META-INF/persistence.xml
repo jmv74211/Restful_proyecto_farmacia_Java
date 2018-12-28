@@ -11,6 +11,8 @@
 		<class>jmv74211.DSS_P4.models.Users.Manager</class>
 		<class>jmv74211.DSS_P4.models.Users.Customer</class>
 		<class>jmv74211.DSS_P4.models.Users.Administrator</class>
+		<class>jmv74211.DSS_P4.models.Users.Department</class>
+		<class>jmv74211.DSS_P4.models.Users.Product</class>
 	
 		<properties>
 		
