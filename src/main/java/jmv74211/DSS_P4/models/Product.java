@@ -23,9 +23,8 @@ public class Product implements Serializable  {
 	@Column(name = "productId")
 	private int productId;
 	
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="departmentId", nullable=false)
-    
 	private Department department;
 	
 	@Column(name = "name")
@@ -47,10 +46,9 @@ public class Product implements Serializable  {
 		
 	}
 	
-	public Product(int productId, Department department, String name, String imageURL, String description,
+	public Product(Department department, String name, String imageURL, String description,
 				boolean outstanding, float price) {
 		
-		this.productId = productId;
 		this.department = department;
 		this.name = name;
 		this.imageURL = imageURL;

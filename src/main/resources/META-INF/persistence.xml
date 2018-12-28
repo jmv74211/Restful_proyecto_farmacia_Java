@@ -13,6 +13,9 @@
 		<class>jmv74211.DSS_P4.models.Users.Administrator</class>
 		<class>jmv74211.DSS_P4.models.Users.Department</class>
 		<class>jmv74211.DSS_P4.models.Users.Product</class>
+		<class>jmv74211.DSS_P4.models.Users.Purchase</class>
+		<class>jmv74211.DSS_P4.models.Users.ShippingCart</class>
+
 	
 		<properties>
 		

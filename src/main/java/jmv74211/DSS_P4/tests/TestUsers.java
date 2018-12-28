@@ -1,11 +1,17 @@
 package jmv74211.DSS_P4.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import jmv74211.DSS_P4.models.Department;
 import jmv74211.DSS_P4.models.Pharmacy;
+import jmv74211.DSS_P4.models.Product;
+import jmv74211.DSS_P4.models.Purchase;
+import jmv74211.DSS_P4.models.ShippingCart;
 import jmv74211.DSS_P4.models.Users.Administrator;
 import jmv74211.DSS_P4.models.Users.Customer;
 import jmv74211.DSS_P4.models.Users.Manager;
@@ -29,6 +35,7 @@ public class TestUsers {
 		
 		manager.getTransaction().begin();
 		
+		
 		// MANAGERS Y FARMACIAS
 		
 		Manager userManager1 = new Manager("manager1@gmail.com", "pwddss", "Juan", "Martínez Valera", "1999-11-07");
@@ -49,8 +56,8 @@ public class TestUsers {
 		manager.persist(p1);
 		manager.persist(p2);
 		manager.persist(p3);
+	
 		
-		// FIN MANAGERS Y FARMACIAS
 		
 		// CLIENTES
 		
@@ -79,8 +86,55 @@ public class TestUsers {
 		manager.persist(dep4);
 		manager.persist(dep5);
 		
-		manager.getTransaction().commit();
 		
+		
+		// PRODUCTOS
+		
+		Product product1 = new Product(dep1,"Producto1","Imagen1","Descripción1",false,35);
+		Product product2 = new Product(dep2,"Producto2","Imagen2","Descripción2",true,10);
+		Product product3 = new Product(dep3,"Producto3","Imagen3","Descripción3",false,12.5f);
+		Product product4 = new Product(dep4,"Producto4","Imagen4","Descripción4",true,7.5f);
+		Product product5 = new Product(dep5,"Producto5","Imagen5","Descripción5",false,35);
+		
+		manager.persist(product1);
+		manager.persist(product2);
+		manager.persist(product3);
+		manager.persist(product4);
+		manager.persist(product5);
+		
+		// COMPRAS
+		
+		List<Product>lista1= new ArrayList<Product>();
+		List<Product>lista2= new ArrayList<Product>();
+		List<Product>lista3= new ArrayList<Product>();
+		
+		lista1.add(product1); lista1.add(product3);
+		lista2.add(product2); lista2.add(product5);
+		lista3.add(product1); lista3.add(product4);
+		
+		Purchase purchase1 = new Purchase("2018-12-05",userCustomer1,lista1,"72343241");
+		Purchase purchase2 = new Purchase("2018-12-12",userCustomer2,lista2,"12312542");
+		Purchase purchase3 = new Purchase("2018-12-20",userCustomer1,lista3,"75125212");
+		
+		manager.persist(purchase1);
+		manager.persist(purchase2);
+		manager.persist(purchase3);
+		
+		
+		ShippingCart shippingCart1 = new ShippingCart(userCustomer1);
+		ShippingCart shippingCart2 = new ShippingCart(userCustomer2);
+		
+		shippingCart1.addProduct(product1);
+		shippingCart1.addProduct(product3);
+		
+		shippingCart2.addProduct(product2);
+		shippingCart2.addProduct(product4);
+		
+		manager.persist(shippingCart1);
+		manager.persist(shippingCart2);
+		
+		manager.getTransaction().commit();
+			
 		
 	}
 	
