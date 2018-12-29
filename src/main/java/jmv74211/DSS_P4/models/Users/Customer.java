@@ -15,12 +15,6 @@ public class Customer extends User {
 	public Customer() {
 		super();
 	}
-
-	public Customer(String email, String password, String name, String surnames, String birthday) {
-		super(email, password, name, surnames, birthday);
-		// TODO Auto-generated constructor stub
-		this.creditCardNumber="Empty";
-	}
 	
 	public Customer(String email, String password, String name, String surnames, String birthday, String creditCardNumber) {
 		super(email, password, name, surnames, birthday);

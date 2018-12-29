@@ -5,6 +5,7 @@ import java.lang.reflect.ParameterizedType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 
 
@@ -23,14 +24,17 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 	public Dao(){
 		
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("app");
+		this.entityManager = entityManagerFactory.createEntityManager();
 		
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
 		  this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];	
+		  
+		  
 	}
 	
 	public void persist(E entity) { 
 		
-		this.entityManager = entityManagerFactory.createEntityManager();
+		//this.entityManager = entityManagerFactory.createEntityManager();
 		
 		this.entityManager.getTransaction().begin();
 		
@@ -38,12 +42,12 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		
 		this.entityManager.getTransaction().commit();
 		
-		this.entityManager.close();
+		//this.entityManager.close();
 	}
 	 
 	public void remove(E entity) { 
 		
-		this.entityManager = entityManagerFactory.createEntityManager();
+		//this.entityManager = entityManagerFactory.createEntityManager();
 		
 		this.entityManager.getTransaction().begin();
 		
@@ -51,16 +55,16 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		
 		this.entityManager.getTransaction().commit();
 		
-		this.entityManager.close();
+		//this.entityManager.close();
 	}
 	
 	public E findById(K id) { 
 		
-		this.entityManager = entityManagerFactory.createEntityManager();
+		//this.entityManager = entityManagerFactory.createEntityManager();
 		
 		E object = entityManager.find(entityClass, id); 
 		
-		this.entityManager.close();
+		//this.entityManager.close();
 		
 		return object;
 	
@@ -68,7 +72,7 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 	
 	public void update(E entity){
 		
-		this.entityManager = entityManagerFactory.createEntityManager();
+		//this.entityManager = entityManagerFactory.createEntityManager();
 		
 		this.entityManager.getTransaction().begin();
 		
@@ -76,8 +80,19 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		
 		this.entityManager.getTransaction().commit();
 		
-		this.entityManager.close();
+		//this.entityManager.close();
 		
+	}
+	
+	public Query query(String queryText){
+		
+		//this.entityManager = entityManagerFactory.createEntityManager();
+		
+		Query query = this.entityManager.createQuery(queryText);
+		
+		//this.entityManager.close();
+		
+		return query;	
 	}
 		
 }

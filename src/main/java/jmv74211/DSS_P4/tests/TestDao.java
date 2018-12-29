@@ -59,7 +59,7 @@ public class TestDao {
 		// CLIENTES
 		
 		Customer userCustomer1 = new Customer("customer1@gmail.com", "pwddss", "Felipe", "Ortega Romero", "1996-06-05","771989912");
-		Customer userCustomer2 = new Customer("customer2@gmail.com", "pwddss", "Julia", "Ramírez Espejo", "1993-01-12");
+		Customer userCustomer2 = new Customer("customer2@gmail.com", "pwddss", "Julia", "Ramírez Espejo", "1993-01-12","151231231");
 		
 		
 		customerDao.save(userCustomer1);
