@@ -21,22 +21,22 @@ public abstract class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "userId")
-	private int userId;
+	protected int userId;
 	
 	@Column(name = "email")
-	private String email;
+	protected String email;
 	
 	@Column(name = "password")
-	private String password;
+	protected String password;
 	
 	@Column(name = "name")
-	private String name;
+	protected String name;
 	
 	@Column(name = "surnames")
-	private String surnames;
+	protected String surnames;
 	
 	@Column(name = "birthday")
-	private String birthday;
+	protected String birthday;
 
 	public User(){
 		

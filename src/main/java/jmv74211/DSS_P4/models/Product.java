@@ -2,7 +2,6 @@ package jmv74211.DSS_P4.models;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +22,7 @@ public class Product implements Serializable  {
 	@Column(name = "productId")
 	private int productId;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name="departmentId", nullable=false)
 	private Department department;
 	
@@ -43,7 +42,7 @@ public class Product implements Serializable  {
 	private float price;
 
 	public Product(){
-		
+		this.department = new Department();
 	}
 	
 	public Product(Department department, String name, String imageURL, String description,

@@ -15,7 +15,7 @@ import jmv74211.DSS_P4.models.Pharmacy;
 public class Manager extends User {
 	
 	@OneToOne(mappedBy = "manager", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+            fetch = FetchType.LAZY)
 	private Pharmacy pharmacyManaged;
 
 	public Manager() {
@@ -26,11 +26,11 @@ public class Manager extends User {
 		super(email, password, name, surnames, birthday);
 	}
 	
-	public Pharmacy getPharmarcyManaged() {
+	public Pharmacy getPharmacyManaged() {
 		return pharmacyManaged;
 	}
 
-	public void setPharmarcyManaged(Pharmacy pharmarcyManaged) {
+	public void setPharmacyManaged(Pharmacy pharmarcyManaged) {
 		this.pharmacyManaged = pharmarcyManaged;
 	}
 

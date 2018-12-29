@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,7 +33,7 @@ public class ShippingCart implements Serializable {
     @JoinColumn(name = "customerId")
 	private Customer customer;
 	
-	@ManyToMany(cascade=CascadeType.ALL)  
+	@ManyToMany  
 	@JoinTable(name="cart_products", 
 	 		joinColumns=@JoinColumn(name="cartId"), 
 	 		inverseJoinColumns=@JoinColumn(name="productId"))
