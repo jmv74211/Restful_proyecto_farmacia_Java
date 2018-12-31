@@ -37,7 +37,7 @@ public class Purchase implements Serializable{
 	private Customer customer;
 	
 	@ManyToMany
-	@JoinTable(name="purchase_product", 
+	@JoinTable(name="Purchase_Product", 
 	 		joinColumns=@JoinColumn(name="purchaseId"), 
 	 		inverseJoinColumns=@JoinColumn(name="productId"))
 	private List<Product> products;

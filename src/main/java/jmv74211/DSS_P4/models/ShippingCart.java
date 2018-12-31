@@ -34,7 +34,7 @@ public class ShippingCart implements Serializable {
 	private Customer customer;
 	
 	@ManyToMany  
-	@JoinTable(name="cart_products", 
+	@JoinTable(name="Cart_Products", 
 	 		joinColumns=@JoinColumn(name="cartId"), 
 	 		inverseJoinColumns=@JoinColumn(name="productId"))
 	private List<Product> products;

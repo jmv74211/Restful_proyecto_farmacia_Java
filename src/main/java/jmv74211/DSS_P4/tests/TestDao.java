@@ -5,6 +5,7 @@ import java.util.List;
 
 import jmv74211.DSS_P4.DAO.DepartmentDao;
 import jmv74211.DSS_P4.DAO.PharmacyDao;
+import jmv74211.DSS_P4.DAO.PharmacyProductDao;
 import jmv74211.DSS_P4.DAO.ProductDao;
 import jmv74211.DSS_P4.DAO.PurchaseDao;
 import jmv74211.DSS_P4.DAO.ShippingCartDao;
@@ -13,6 +14,7 @@ import jmv74211.DSS_P4.DAO.Users.CustomerDao;
 import jmv74211.DSS_P4.DAO.Users.ManagerDao;
 import jmv74211.DSS_P4.models.Department;
 import jmv74211.DSS_P4.models.Pharmacy;
+import jmv74211.DSS_P4.models.PharmacyProduct;
 import jmv74211.DSS_P4.models.Product;
 import jmv74211.DSS_P4.models.Purchase;
 import jmv74211.DSS_P4.models.ShippingCart;
@@ -22,12 +24,10 @@ import jmv74211.DSS_P4.models.Users.Manager;
 
 
 public class TestDao {
-
-	public static void main(String[] args) {
-		
+	
+	public static void insertDAO(){
 		
 		// DAO
-		
 		ManagerDao managerDao = new ManagerDao();
 		AdministratorDao administratorDao = new AdministratorDao();
 		CustomerDao customerDao = new CustomerDao();
@@ -36,8 +36,10 @@ public class TestDao {
 		ProductDao productDao = new ProductDao();
 		PurchaseDao purchaseDao = new PurchaseDao();
 		ShippingCartDao shippingCartDao = new ShippingCartDao();
-		
-		
+		PharmacyProductDao pharmacyProductDao = new PharmacyProductDao();
+				
+				
+				
 		// MANAGERS Y FARMACIAS
 		
 		Manager userManager1 = new Manager("manager1@gmail.com", "pwddss", "Juan", "Martínez Valera", "1999-11-07");
@@ -131,6 +133,33 @@ public class TestDao {
 		shippingCartDao.save(shippingCart1);
 		shippingCartDao.save(shippingCart2);
 		
+		// PHARMACY-PRODUCT
+		
+		//PharmacyProduct pp1 = new PharmacyProduct(pharmacyDao.getPharmacy(2), productDao.getProduct(2),3);
+		// PharmacyId, ProductId, quantity
+		PharmacyProduct pp1 = new PharmacyProduct(2,2,3);
+		
+		
+		pharmacyProductDao.save(pp1);
+		
+	}
+	
+
+	public static void main(String[] args) {
+		
+		PharmacyDao pharmacyDao = new PharmacyDao();
+		
+		ProductDao productDao = new ProductDao();
+		
+		Pharmacy pharmacy2 = pharmacyDao.getPharmacy(2);
+		Product product5 = productDao.getProduct(5);
+		Product product2 = productDao.getProduct(2);
+		
+		
+		
+		//insertDAO();
+		//pharmacy2.addProduct(product5, 2);
+		pharmacy2.addProduct(product2, 2);
 		
 	}
 

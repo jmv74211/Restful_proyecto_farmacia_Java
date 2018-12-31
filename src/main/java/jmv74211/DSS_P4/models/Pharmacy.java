@@ -2,7 +2,6 @@ package jmv74211.DSS_P4.models;
 
 import java.io.Serializable;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import jmv74211.DSS_P4.models.Users.User;
-
+import jmv74211.DSS_P4.DAO.PharmacyProductDao;
 import jmv74211.DSS_P4.models.Users.Manager;
 
 
@@ -42,8 +41,18 @@ public class Pharmacy implements Serializable {
     @JoinColumn(name = "userManagerId")
 	private Manager manager;
 	
-	public Pharmacy(){
+	/*@ManyToMany  
+	@JoinTable(name="Pharmacy_Product", 
+	 		joinColumns=@JoinColumn(name="pharmacyId"), 
+	 		inverseJoinColumns=@JoinColumn(name="ProductId"))*/
+
+	// Tengo que crear este registro con @OneToMany o vicerversa??
+	//@OneToMany
+	//private List<PharmacyProduct> products;
 	
+	public Pharmacy(){
+		
+		//this.products = new ArrayList<PharmacyProduct>();
 	}
 	
 	public Pharmacy(String name, double latitude, double length, Manager manager) {
@@ -51,6 +60,8 @@ public class Pharmacy implements Serializable {
 		this.latitude = latitude;
 		this.length = length;
 		this.manager = manager;
+		
+		//this.products = new ArrayList<PharmacyProduct>();
 	}
 
 	public int getId() {
@@ -101,6 +112,21 @@ public class Pharmacy implements Serializable {
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
+	
+	public void addProduct(Product product, int quantity){
+		
+		PharmacyProductDao pharmacyProductDao = new PharmacyProductDao();
+		
+		pharmacyProductDao.addProduct(this,product, quantity);
+	}
+/*
+	public List<PharmacyProduct> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<PharmacyProduct> products) {
+		this.products = products;
+	}*/
 
 	@Override
 	public String toString() {
