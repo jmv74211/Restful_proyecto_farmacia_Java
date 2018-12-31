@@ -99,6 +99,17 @@ public class Purchase implements Serializable{
 	public void setPaymentData(String paymentData) {
 		this.paymentData = paymentData;
 	}
+	
+	public boolean hasValidAttributes(){
+		
+		if(this == null || this.customer == null || this.date == null || this.paymentData == null
+				|| this.products == null || this.products.size() > 0 )
+			
+			return false;
+		
+		else
+			return true;
+	}
 
 	@Override
 	public String toString() {

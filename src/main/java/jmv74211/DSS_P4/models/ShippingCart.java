@@ -98,6 +98,16 @@ public class ShippingCart implements Serializable {
 		}
 	}
 	
+	public boolean hasValidAttributes(){
+		
+		if(this == null || this.customer == null || this.price < 0 || this.products == null)
+			
+			return false;
+		
+		else
+			return true;
+	}
+	
 
 	@Override
 	public String toString() {

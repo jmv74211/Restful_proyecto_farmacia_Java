@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import jmv74211.DSS_P4.DAO.DepartmentDao;
+
 @Entity
 @Table(name = "Product")
 public class Product implements Serializable  {
@@ -46,16 +48,16 @@ public class Product implements Serializable  {
 	}
 	
 	public Product(Department department, String name, String imageURL, String description,
-				boolean outstanding, float price) {
+				boolean outstanding, double price) {
 		
 		this.department = department;
 		this.name = name;
 		this.imageURL = imageURL;
 		this.description = description;
 		this.outstanding = outstanding;
-		this.price = price;
+		this.price = (float) price;
 	}
-
+	
 	public int getProductId() {
 		return productId;
 	}
@@ -110,6 +112,16 @@ public class Product implements Serializable  {
 
 	public void setPrice(float price) {
 		this.price = price;
+	}
+	
+	public boolean hasValidAttributes(){
+		
+		if(this == null || this.getDepartment() == null || this.description == null
+				|| this.imageURL == null || this.name==null || this.price < 0)
+			return false;
+		
+		else
+			return true;
 	}
 
 	@Override

@@ -10,36 +10,13 @@ public class PharmacyProductPK implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	//private Pharmacy pharmacy;
 	private int pharmacyId;
 	
-	//private Product product;
 	private int productId;
 	
 	public PharmacyProductPK(){
 		
 	}
-	
-	
-	
-	/*
-	public Pharmacy getPharmacy() {
-		return pharmacy;
-	}
-
-	public void setPharmacy(Pharmacy pharmacy) {
-		this.pharmacy = pharmacy;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	*/
-	
 	
 	public int getPharmacyId() {
 		return pharmacyId;

@@ -6,7 +6,6 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-
 import jmv74211.DSS_P4.models.Pharmacy;
 
 
@@ -34,6 +33,18 @@ public class Manager extends User {
 		this.pharmacyManaged = pharmarcyManaged;
 	}
 
+	public boolean hasValidAttributes(){
+	
+		if(this == null || this.getName() == null || this.getSurnames() == null
+				|| this.getPharmacyManaged() == null || this.getBirthday() == null 
+				|| this.getEmail()==null || this.getPassword() == null)
+			
+			return false;
+		
+		else
+			return true;
+	}
+	
 	@Override
 	public String toString() {
 		return "Manager [pharmacyManaged=" + pharmacyManaged + "]";

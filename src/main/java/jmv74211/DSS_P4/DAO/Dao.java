@@ -94,5 +94,13 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		
 		return query;	
 	}
+	
+	public boolean exist(K id){
+		
+		if(this.findById(id) == null)
+			return false;
+		
+		return true;
+	}
 		
 }

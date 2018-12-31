@@ -98,6 +98,8 @@ public abstract class User {
 		this.birthday = birthday;
 	}
 	
+	public abstract boolean hasValidAttributes();
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name

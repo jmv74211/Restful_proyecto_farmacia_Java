@@ -41,18 +41,10 @@ public class Pharmacy implements Serializable {
     @JoinColumn(name = "userManagerId")
 	private Manager manager;
 	
-	/*@ManyToMany  
-	@JoinTable(name="Pharmacy_Product", 
-	 		joinColumns=@JoinColumn(name="pharmacyId"), 
-	 		inverseJoinColumns=@JoinColumn(name="ProductId"))*/
-
-	// Tengo que crear este registro con @OneToMany o vicerversa??
-	//@OneToMany
-	//private List<PharmacyProduct> products;
 	
 	public Pharmacy(){
-		
-		//this.products = new ArrayList<PharmacyProduct>();
+		this.latitude = 0;
+		this.length = 0;
 	}
 	
 	public Pharmacy(String name, double latitude, double length, Manager manager) {
@@ -61,7 +53,6 @@ public class Pharmacy implements Serializable {
 		this.length = length;
 		this.manager = manager;
 		
-		//this.products = new ArrayList<PharmacyProduct>();
 	}
 
 	public int getId() {
@@ -119,14 +110,18 @@ public class Pharmacy implements Serializable {
 		
 		pharmacyProductDao.addProduct(this,product, quantity);
 	}
-/*
-	public List<PharmacyProduct> getProducts() {
-		return products;
+	
+	public boolean hasValidAttributes(){
+		
+		if(this == null || this.latitude == 0 || this.length == 0 || this.manager == null 
+				|| this.name == null)
+			
+			return false;
+		
+		else
+			return true;
 	}
 
-	public void setProducts(List<PharmacyProduct> products) {
-		this.products = products;
-	}*/
 
 	@Override
 	public String toString() {

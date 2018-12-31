@@ -29,6 +29,18 @@ public class Customer extends User {
 	public void setCreditCardNumber(String creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
+	
+	public boolean hasValidAttributes(){
+		
+		if(this == null || this.getName() == null || this.getSurnames() == null
+				|| this.getCreditCardNumber() == null || this.getBirthday() == null 
+				|| this.getEmail()==null || this.getPassword() == null)
+			
+			return false;
+		
+		else
+			return true;
+	}
 
 	@Override
 	public String toString() {

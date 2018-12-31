@@ -16,6 +16,17 @@ public class Administrator extends User {
 		super(email, password, name, surnames, birthday);
 		
 	}
+	
+	public boolean hasValidAttributes(){
+		
+		if(this == null || this.getName() == null || this.getSurnames() == null
+				|| this.getBirthday() == null || this.getEmail()==null || this.getPassword() == null)
+			
+			return false;
+		
+		else
+			return true;
+	}
 
 	@Override
 	public String toString() {

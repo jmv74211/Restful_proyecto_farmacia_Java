@@ -47,6 +47,16 @@ public class Department implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public boolean hasValidAttributes(){
+		
+		if(this == null || this.name == null )
+			
+			return false;
+		
+		else
+			return true;
+	}
 
 	@Override
 	public String toString() {
