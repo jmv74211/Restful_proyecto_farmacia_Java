@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import jmv74211.DSS_P4.models.Users.User;
 import jmv74211.DSS_P4.DAO.PharmacyProductDao;
 import jmv74211.DSS_P4.models.Users.Manager;
 
@@ -96,7 +95,7 @@ public class Pharmacy implements Serializable {
 		this.pharmacyId = pharmacyId;
 	}
 
-	public User getManager() {
+	public Manager getManager() {
 		return this.manager;
 	}
 

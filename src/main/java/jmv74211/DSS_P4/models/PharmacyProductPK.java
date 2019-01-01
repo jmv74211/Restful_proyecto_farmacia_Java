@@ -18,6 +18,15 @@ public class PharmacyProductPK implements Serializable{
 		
 	}
 	
+	
+	
+	public PharmacyProductPK(int pharmacyId, int productId) {
+		this.pharmacyId = pharmacyId;
+		this.productId = productId;
+	}
+
+
+
 	public int getPharmacyId() {
 		return pharmacyId;
 	}

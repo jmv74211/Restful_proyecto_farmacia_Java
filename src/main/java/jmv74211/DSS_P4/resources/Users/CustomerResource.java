@@ -1,4 +1,4 @@
-package jmv74211.DSS_P4.resources;
+package jmv74211.DSS_P4.resources.Users;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,7 +15,7 @@ import jmv74211.DSS_P4.models.Users.Customer;
 
 
 @Path("user")
-public class UserResource {
+public class CustomerResource {
 	  	  
 	@PUT
 	@Produces( {MediaType.APPLICATION_JSON} )

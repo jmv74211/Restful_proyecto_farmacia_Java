@@ -4,11 +4,12 @@ import javax.persistence.Query;
 
 import jmv74211.DSS_P4.models.Pharmacy;
 import jmv74211.DSS_P4.models.PharmacyProduct;
+import jmv74211.DSS_P4.models.PharmacyProductPK;
 import jmv74211.DSS_P4.models.Product;
 
 
 
-public class PharmacyProductDao extends Dao<Integer,PharmacyProduct> {
+public class PharmacyProductDao extends Dao<PharmacyProductPK,PharmacyProduct> {
 	
 	public PharmacyProductDao(){
 		super();	
@@ -55,6 +56,12 @@ public class PharmacyProductDao extends Dao<Integer,PharmacyProduct> {
 		
 	public void updateProduct(PharmacyProduct pharmacyProduct){
 		this.update(pharmacyProduct);
+	}
+	
+	public PharmacyProduct getPharmacyProduct(PharmacyProductPK key){
+		
+		return this.findById(key);
+		
 	}
 
 }

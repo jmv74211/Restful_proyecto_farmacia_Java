@@ -21,8 +21,6 @@ public class ProductResource {
 	@Consumes( {MediaType.APPLICATION_JSON} )
 	public Response createProduct(Product product){
 		
-		System.out.println(product);
-		
 		if(!product.hasValidAttributes()){
 			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
 		}
@@ -86,9 +84,7 @@ public class ProductResource {
 			productObject.setName(product.getName());
 			productObject.setPrice(product.getPrice());
 			productObject.setOutstanding(product.isOutstanding());
-			
-			System.out.println("Before  " + productObject);
-			
+				
 			productDao.save(productObject);
 			
 			String json = "{ result: Product successfully updated with id = " + productObject.getProductId() + "}";

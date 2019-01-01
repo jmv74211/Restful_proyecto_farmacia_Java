@@ -36,7 +36,7 @@ public class Manager extends User {
 	public boolean hasValidAttributes(){
 	
 		if(this == null || this.getName() == null || this.getSurnames() == null
-				|| this.getPharmacyManaged() == null || this.getBirthday() == null 
+				|| this.getBirthday() == null 
 				|| this.getEmail()==null || this.getPassword() == null)
 			
 			return false;
