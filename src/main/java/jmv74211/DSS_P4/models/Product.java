@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import jmv74211.DSS_P4.DAO.DepartmentDao;
 
 @Entity
 @Table(name = "Product")

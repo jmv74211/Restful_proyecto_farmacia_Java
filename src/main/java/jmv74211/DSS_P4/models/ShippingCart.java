@@ -55,6 +55,14 @@ public class ShippingCart implements Serializable {
 		this.customer = customer;
 		this.price = 0;
 	}
+	
+	public ShippingCart(Customer customer, List<Product> products){
+		
+		this.products = new ArrayList<Product>();
+		this.products = products;
+		this.customer = customer;
+		this.price = 0;
+	}
 
 	public int getCartId() {
 		return cartId;
@@ -95,6 +103,14 @@ public class ShippingCart implements Serializable {
 		if(product != null){
 			this.products.add(product);
 			this.price += product.getPrice();
+		}
+	}
+	
+	public void delProduct(Product product){
+		
+		if(product != null){
+			this.products.remove(product); // ¿Primera ocurrencia?
+			this.price -= product.getPrice();
 		}
 	}
 	

@@ -32,7 +32,7 @@ public class Purchase implements Serializable{
 	@Column(name = "date")
 	private String date;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne
     @JoinColumn(name="customerId", nullable=false)
 	private Customer customer;
 	
@@ -47,9 +47,8 @@ public class Purchase implements Serializable{
 
 	
 	public Purchase(){
-		
-		this.products = new ArrayList<Product>();
 		this.customer = new Customer();
+		this.products = new ArrayList<Product>();
 	}
 	
 	public Purchase(String date, Customer customer, List<Product> products, String paymentData) {
@@ -103,7 +102,7 @@ public class Purchase implements Serializable{
 	public boolean hasValidAttributes(){
 		
 		if(this == null || this.customer == null || this.date == null || this.paymentData == null
-				|| this.products == null || this.products.size() > 0 )
+				|| this.products == null || this.products.size() <= 0 )
 			
 			return false;
 		

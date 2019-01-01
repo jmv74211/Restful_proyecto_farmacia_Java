@@ -23,8 +23,6 @@ public class PharmacyResource {
 	@Consumes( {MediaType.APPLICATION_JSON} )
 	public Response createPharmacy(Pharmacy pharmacy){
 		
-		System.out.println(pharmacy);
-		
 		if(!pharmacy.hasValidAttributes()){
 			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
 		}
