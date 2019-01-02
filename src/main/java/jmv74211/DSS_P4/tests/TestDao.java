@@ -9,6 +9,7 @@ import jmv74211.DSS_P4.DAO.PharmacyProductDao;
 import jmv74211.DSS_P4.DAO.ProductDao;
 import jmv74211.DSS_P4.DAO.PurchaseDao;
 import jmv74211.DSS_P4.DAO.ShippingCartDao;
+import jmv74211.DSS_P4.DAO.ShippingCartProductDao;
 import jmv74211.DSS_P4.DAO.Users.AdministratorDao;
 import jmv74211.DSS_P4.DAO.Users.CustomerDao;
 import jmv74211.DSS_P4.DAO.Users.ManagerDao;
@@ -18,6 +19,7 @@ import jmv74211.DSS_P4.models.PharmacyProduct;
 import jmv74211.DSS_P4.models.Product;
 import jmv74211.DSS_P4.models.Purchase;
 import jmv74211.DSS_P4.models.ShippingCart;
+import jmv74211.DSS_P4.models.ShippingCartProduct;
 import jmv74211.DSS_P4.models.Users.Administrator;
 import jmv74211.DSS_P4.models.Users.Customer;
 import jmv74211.DSS_P4.models.Users.Manager;
@@ -37,6 +39,7 @@ public class TestDao {
 		PurchaseDao purchaseDao = new PurchaseDao();
 		ShippingCartDao shippingCartDao = new ShippingCartDao();
 		PharmacyProductDao pharmacyProductDao = new PharmacyProductDao();
+		ShippingCartProductDao shippingCartProductDao = new ShippingCartProductDao();
 				
 				
 				
@@ -124,12 +127,6 @@ public class TestDao {
 		ShippingCart shippingCart1 = new ShippingCart(userCustomer1);
 		ShippingCart shippingCart2 = new ShippingCart(userCustomer2);
 		
-		shippingCart1.addProduct(product1);
-		shippingCart1.addProduct(product3);
-		
-		shippingCart2.addProduct(product2);
-		shippingCart2.addProduct(product4);
-		
 		shippingCartDao.save(shippingCart1);
 		shippingCartDao.save(shippingCart2);
 		
@@ -142,24 +139,45 @@ public class TestDao {
 		
 		pharmacyProductDao.save(pp1);
 		
+		
+		
+		// SHIPPINGCART-PRODUCT
+		ShippingCartProduct shp1 = new ShippingCartProduct(shippingCart1.getCartId(),4,2);
+		
+		//ShippingCartProductDao shippingCartProductDao = new ShippingCartProductDao();
+		
+		shippingCartProductDao.save(shp1);
+		
+		/*ShippingCartProduct shp2 = new ShippingCartProduct(shippingCart1.getCartId(),2,2);
+		
+		
+		
+		
+		
+		
+		shippingCartProductDao.save(shp2);
+		
+		*/
+		
 	}
 	
 
 	public static void main(String[] args) {
 		
-		PharmacyDao pharmacyDao = new PharmacyDao();
+		/*PharmacyDao pharmacyDao = new PharmacyDao();
 		
 		ProductDao productDao = new ProductDao();
 		
 		Pharmacy pharmacy2 = pharmacyDao.getPharmacy(2);
 		Product product5 = productDao.getProduct(5);
-		Product product2 = productDao.getProduct(2);
-		
+		Product product2 = productDao.getProduct(2);*/
 		
 		
 		//insertDAO();
+		
+		
 		//pharmacy2.addProduct(product5, 2);
-		pharmacy2.addProduct(product2, 2);
+		//pharmacy2.addProduct(product2, 2);
 		
 	}
 

@@ -60,7 +60,6 @@ public class ShippingCartResource {
 			
 			shippingCartObject.setCustomer(shippingCart.getCustomer());
 			shippingCartObject.setPrice(shippingCart.getPrice());
-			shippingCartObject.setProducts(shippingCart.getProducts());
 			
 			shippingCartDao.save(shippingCartObject);
 			
@@ -92,5 +91,8 @@ public class ShippingCartResource {
 		
 		return Response.ok(json, MediaType.APPLICATION_JSON).build();	
 	}
+	
+	
+	
 	
 }

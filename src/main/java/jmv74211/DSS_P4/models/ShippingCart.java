@@ -1,8 +1,7 @@
 package jmv74211.DSS_P4.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+import jmv74211.DSS_P4.DAO.ShippingCartProductDao;
 import jmv74211.DSS_P4.models.Users.Customer;
 
 @Entity
@@ -33,37 +33,21 @@ public class ShippingCart implements Serializable {
     @JoinColumn(name = "customerId")
 	private Customer customer;
 	
-	@ManyToMany  
-	@JoinTable(name="Cart_Products", 
-	 		joinColumns=@JoinColumn(name="cartId"), 
-	 		inverseJoinColumns=@JoinColumn(name="productId"))
-	private List<Product> products;
-	
 	@Column(name = "price")
 	private float price;
 	
 	public ShippingCart(){
 		
 		this.customer = new Customer();
-		this.products = new ArrayList<Product>();
 		this.price = 0;
 	}
 	
 	public ShippingCart(Customer customer){
 		
-		this.products = new ArrayList<Product>();
 		this.customer = customer;
 		this.price = 0;
 	}
 	
-	public ShippingCart(Customer customer, List<Product> products){
-		
-		this.products = new ArrayList<Product>();
-		this.products = products;
-		this.customer = customer;
-		this.price = 0;
-	}
-
 	public int getCartId() {
 		return cartId;
 	}
@@ -81,14 +65,7 @@ public class ShippingCart implements Serializable {
 		this.customer = customer;
 	}
 	
-	public List<Product> getProducts() {
-		return products;
-	}
 
-	public void setProducts(List<Product> product) {
-		this.products = product;
-	}
-	
 	public float getPrice() {
 		return price;
 	}
@@ -98,25 +75,17 @@ public class ShippingCart implements Serializable {
 	}
 	
 	
-	public void addProduct(Product product){
+	public void addProduct(Product product, int quantity){
 		
-		if(product != null){
-			this.products.add(product);
-			this.price += product.getPrice();
-		}
+		ShippingCartProductDao shippingCartProductDao = new ShippingCartProductDao();
+		
+		shippingCartProductDao.addProduct(this,product, quantity);
 	}
 	
-	public void delProduct(Product product){
-		
-		if(product != null){
-			this.products.remove(product); // ¿Primera ocurrencia?
-			this.price -= product.getPrice();
-		}
-	}
-	
+
 	public boolean hasValidAttributes(){
 		
-		if(this == null || this.customer == null || this.price < 0 || this.products == null)
+		if(this == null || this.customer == null || this.price < 0 )
 			
 			return false;
 		
@@ -127,7 +96,9 @@ public class ShippingCart implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ShippingCart [cartId=" + cartId + ", customer=" + customer + ", product=" + products + ", price=" + price
+		
+		
+		return "ShippingCart [cartId=" + cartId + ", customer=" + customer + ", price=" + price
 				+ "]";
 	}
 
