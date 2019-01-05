@@ -12,19 +12,22 @@ import javax.ws.rs.core.Response;
 import jmv74211.DSS_P4.DAO.Users.UserDao;
 
 
-
 @Path("login")
 public class LoginResource {
 
     private String email;
 
     private String password;
-    	
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	@Override
 	public String toString() {
 		return "LoginResource [email=" + email + ", password=" + password + "]";
 	}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@POST
 	@Produces( {MediaType.APPLICATION_JSON} )
 	@Consumes( {MediaType.APPLICATION_JSON} )
@@ -34,35 +37,44 @@ public class LoginResource {
 		System.out.println(loginObject);
 		
 		if(loginObject == null || loginObject.getEmail() == null || loginObject.getPassword() == null){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data, need email and password}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data, need email and password\"}").build();
 		}
 		else{
 			
 			boolean check = this.checkCredentials(loginObject.getEmail(), loginObject.getPassword());
 			
-			String json = "{ result:" + check + "}";
+			String json = "{ \"result\":" + check + "}";
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}	
 		
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public String getEmail() {
 		return email;
 	}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public String getPassword() {
 		return password;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void setPassword(String pasword) {
 		this.password = pasword;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public boolean checkCredentials(String email, String password){
 		
@@ -74,5 +86,7 @@ public class LoginResource {
 		
 		return query.getResultList().size() > 0 ? true : false;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

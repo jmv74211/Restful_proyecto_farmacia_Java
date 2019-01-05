@@ -13,6 +13,7 @@ import jmv74211.DSS_P4.DAO.ShippingCartProductDao;
 import jmv74211.DSS_P4.DAO.Users.AdministratorDao;
 import jmv74211.DSS_P4.DAO.Users.CustomerDao;
 import jmv74211.DSS_P4.DAO.Users.ManagerDao;
+import jmv74211.DSS_P4.DAO.Users.UserDao;
 import jmv74211.DSS_P4.models.Department;
 import jmv74211.DSS_P4.models.Pharmacy;
 import jmv74211.DSS_P4.models.PharmacyProduct;
@@ -23,11 +24,12 @@ import jmv74211.DSS_P4.models.ShippingCartProduct;
 import jmv74211.DSS_P4.models.Users.Administrator;
 import jmv74211.DSS_P4.models.Users.Customer;
 import jmv74211.DSS_P4.models.Users.Manager;
+import jmv74211.DSS_P4.models.Users.User;
 
 
 public class TestDao {
 	
-	public static void insertDAO(){
+	/*public static void insertDAO(){
 		
 		// DAO
 		ManagerDao managerDao = new ManagerDao();
@@ -148,36 +150,111 @@ public class TestDao {
 		
 		shippingCartProductDao.save(shp1);
 		
-		/*ShippingCartProduct shp2 = new ShippingCartProduct(shippingCart1.getCartId(),2,2);
-		
-		
-		
-		
-		
-		
-		shippingCartProductDao.save(shp2);
-		
-		*/
-		
-	}
+	}*/
 	
 
 	public static void main(String[] args) {
 		
-		/*PharmacyDao pharmacyDao = new PharmacyDao();
-		
+		UserDao userDao = new UserDao();
+		ManagerDao managerDao = new ManagerDao();
+		AdministratorDao administratorDao = new AdministratorDao();
+		CustomerDao customerDao = new CustomerDao();
+		PharmacyDao pharmacyDao = new PharmacyDao();
+		DepartmentDao departmentDao = new DepartmentDao();
 		ProductDao productDao = new ProductDao();
+		PurchaseDao purchaseDao = new PurchaseDao();
+		ShippingCartDao shippingCartDao = new ShippingCartDao();
+		PharmacyProductDao pharmacyProductDao = new PharmacyProductDao();
+		ShippingCartProductDao shippingCartProductDao = new ShippingCartProductDao();
 		
-		Pharmacy pharmacy2 = pharmacyDao.getPharmacy(2);
-		Product product5 = productDao.getProduct(5);
-		Product product2 = productDao.getProduct(2);*/
+		/*managerDao.getData();
+		
+		administratorDao.getData();
+		customerDao.getData(); */
+		
+		System.out.println("-------------------- USERS ---------------------");
+		for(User p: userDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- MANAGERS ---------------------");
+		for(Manager p: managerDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- ADMINISTRATOR ---------------------");
+		for(Administrator p: administratorDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- CUSTOMERS ---------------------");
+		for(Customer p: customerDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- PHARMACYS ---------------------");
+		for(Pharmacy p: pharmacyDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- DEPARTMENTS ---------------------");
+		for(Department p: departmentDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- PRODUCTS---------------------");
+		for(Product p: productDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- PURCHASES ---------------------");
+		for(Purchase p: purchaseDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- SHIPPINGCART ---------------------");
+		for(ShippingCart p: shippingCartDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- PHARMACYPRODUCT ---------------------");
+		for(PharmacyProduct p: pharmacyProductDao.getData()){
+			System.out.println(p);
+		}
+		
+		System.out.println("-------------------- SHIPPINGCARTPRODUCT ---------------------");
+		for(ShippingCartProduct p: shippingCartProductDao.getData()){
+			System.out.println(p);
+		}
+			
+		System.out.println("-------------------- PURCHASEPRODUCT ---------------------");
+		
+		for(Purchase p: purchaseDao.getData()){
+			
+			List<Product> productList = new ArrayList<Product>();
+			
+			productList = p.getProducts();
+			
+			System.out.println("PurchaseId = " + p.getPurchaseId());
+			
+			for(Product d: productList){
+				System.out.println("productId = " + d.getProductId());
+			}	
+		}
+		
+
+		
+		
+		
+		
+	
+		
+		//pharmacyDao.getData();
 		
 		
 		//insertDAO();
 		
-		
-		//pharmacy2.addProduct(product5, 2);
-		//pharmacy2.addProduct(product2, 2);
+
 		
 	}
 

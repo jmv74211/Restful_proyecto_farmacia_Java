@@ -1,7 +1,12 @@
 package jmv74211.DSS_P4.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -20,6 +25,28 @@ import jmv74211.DSS_P4.models.PharmacyProductPK;
 @Path("pharmacy/{id}/products")
 public class PharmacyProductResource {
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	@SuppressWarnings("unchecked")
+	@GET
+	@Produces( {MediaType.APPLICATION_JSON} )
+	@Consumes( {MediaType.APPLICATION_JSON} )
+	public ArrayList<PharmacyProduct> getAllPharmacyProduct(@PathParam("id") int id){
+		
+		System.out.println("called getAllPharmacyProduct()");
+		
+		PharmacyProductDao  pharmacyProductDao = new PharmacyProductDao();
+		
+		Query query = pharmacyProductDao.query("SELECT a FROM PharmacyProduct a WHERE a.pharmacyId = " + id);
+		
+		List<PharmacyProduct> pharmacyProductList = new ArrayList<PharmacyProduct>();
+		pharmacyProductList = query.getResultList();
+
+		return (ArrayList<PharmacyProduct>) pharmacyProductList;
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@PUT
 	@Produces( {MediaType.APPLICATION_JSON} )
 	@Consumes( {MediaType.APPLICATION_JSON} )
@@ -27,7 +54,7 @@ public class PharmacyProductResource {
 		
 		
 		if(!pharmacyProduct.hasValidAttributes()){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data parameters\"}").build();
 		}
 		else{
 			PharmacyProductDao pharmacyProductDao = new PharmacyProductDao();
@@ -37,13 +64,15 @@ public class PharmacyProductResource {
 			pharmacyProductDao.addProduct(pharmacyDao.getPharmacy(pharmacyProduct.getPharmacyId()), 
 					productDao.getProduct(pharmacyProduct.getProductId()),pharmacyProduct.getQuantity());			
 			
-			String json = "{ result: It has been successfully added " + pharmacyProduct.getQuantity() + " products with id = " + 
-					pharmacyProduct.getProductId() + " to the pharmacy with id = " + pharmacyProduct.getPharmacyId() + "}";
+			String json = "{ \"result\": \"It has been successfully added " + pharmacyProduct.getQuantity() + " products with id = " + 
+					pharmacyProduct.getProductId() + " to the pharmacy with id = " + pharmacyProduct.getPharmacyId() + "\"}";
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}	
 		
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	@POST
 	@Produces( {MediaType.APPLICATION_JSON} )
@@ -52,7 +81,7 @@ public class PharmacyProductResource {
 		
 		
 		if(!pharmacyProduct.hasValidAttributes()){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data parameters\"}").build();
 		}
 		else{
 			
@@ -63,20 +92,22 @@ public class PharmacyProductResource {
 			PharmacyProduct pharmacyProductObject = pharmacyProductDao.getPharmacyProduct(pk);
 			
 			if(pharmacyProductObject == null){
-				return Response.status(Response.Status.NO_CONTENT).entity("{result : Wrong data }").build();
+				return Response.status(Response.Status.NO_CONTENT).entity("{\"result\" : \"Wrong data\" }").build();
 			}
 			
 			pharmacyProductObject.setQuantity(pharmacyProduct.getQuantity());
 			
 			pharmacyProductDao.save(pharmacyProductObject);
 			
-			String json = "{ result: It has been successfully updated. Now the pharmacy with id = " + pharmacyProduct.getPharmacyId() + " has " +  
-			pharmacyProduct.getQuantity() + "products with id = " + pharmacyProduct.getProductId() + "}";
+			String json = "{ \"result\": \"It has been successfully updated. Now the pharmacy with id = " + pharmacyProduct.getPharmacyId() + " has " +  
+			pharmacyProduct.getQuantity() + "products with id = " + pharmacyProduct.getProductId() + "\"}";
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}	
 		
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@DELETE
 	@Path("/{productId}")
@@ -92,13 +123,13 @@ public class PharmacyProductResource {
 		PharmacyProduct pharmacyProductObject = pharmacyProductDao.getPharmacyProduct(pk);
 		
 		if(pharmacyProductObject == null){
-			return Response.status(Response.Status.NO_CONTENT).entity("{result : Wrong id params}").build();
+			return Response.status(Response.Status.NO_CONTENT).entity("{\"result\" : \"Wrong id params\"}").build();
 		}
 		
 		pharmacyProductDao.delete(pharmacyProductObject);
 		
-		String json = "{ result: It has been successfully deleted. Now the pharmacy with id = " + pharmacyProductObject.getPharmacyId() + 
-				" does not have any product with id = " + pharmacyProductObject.getProductId() + "}";
+		String json = "{ \"result\": \"It has been successfully deleted. Now the pharmacy with id = " + pharmacyProductObject.getPharmacyId() + 
+				" does not have any product with id = " + pharmacyProductObject.getProductId() + "\"}";
 		
 		return Response.ok(json, MediaType.APPLICATION_JSON).build();
 					

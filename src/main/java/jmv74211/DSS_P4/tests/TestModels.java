@@ -11,7 +11,6 @@ import jmv74211.DSS_P4.models.Department;
 import jmv74211.DSS_P4.models.Pharmacy;
 import jmv74211.DSS_P4.models.Product;
 import jmv74211.DSS_P4.models.Purchase;
-import jmv74211.DSS_P4.models.ShippingCart;
 import jmv74211.DSS_P4.models.Users.Administrator;
 import jmv74211.DSS_P4.models.Users.Customer;
 import jmv74211.DSS_P4.models.Users.Manager;
@@ -62,7 +61,7 @@ public class TestModels {
 		// CLIENTES
 		
 		Customer userCustomer1 = new Customer("customer1@gmail.com", "pwddss", "Felipe", "Ortega Romero", "1996-06-05","771989912");
-		Customer userCustomer2 = new Customer("customer2@gmail.com", "pwddss", "Julia", "Ramírez Espejo", "1993-01-12");
+		Customer userCustomer2 = new Customer("customer2@gmail.com", "pwddss", "Julia", "Ramírez Espejo", "1993-01-12","231232131");
 		
 		
 		manager.persist(userCustomer1);
@@ -122,7 +121,7 @@ public class TestModels {
 		
 		// CARRITO
 		
-		ShippingCart shippingCart1 = new ShippingCart(userCustomer1);
+		/*ShippingCart shippingCart1 = new ShippingCart(userCustomer1);
 		ShippingCart shippingCart2 = new ShippingCart(userCustomer2);
 		
 		shippingCart1.addProduct(product1);
@@ -132,7 +131,7 @@ public class TestModels {
 		shippingCart2.addProduct(product4);
 		
 		manager.persist(shippingCart1);
-		manager.persist(shippingCart2);
+		manager.persist(shippingCart2);*/
 		
 		manager.getTransaction().commit();
 			

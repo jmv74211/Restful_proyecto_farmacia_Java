@@ -1,7 +1,12 @@
 package jmv74211.DSS_P4.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -16,13 +21,35 @@ import jmv74211.DSS_P4.models.Product;
 @Path("/product")
 public class ProductResource {
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@SuppressWarnings("unchecked")
+	@GET
+	@Produces( {MediaType.APPLICATION_JSON} )
+	@Consumes( {MediaType.APPLICATION_JSON} )
+	public ArrayList<Product> getAllProducts(){
+		
+		System.out.println("called getAllProducts()");
+		
+		ProductDao productDao = new ProductDao();
+		
+		Query query = productDao.query("SELECT a FROM Product a");
+		
+		List<Product> productList = new ArrayList<Product>();
+		productList = query.getResultList();
+	
+		return (ArrayList<Product>) productList;
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@PUT
 	@Produces( {MediaType.APPLICATION_JSON} )
 	@Consumes( {MediaType.APPLICATION_JSON} )
 	public Response createProduct(Product product){
 		
 		if(!product.hasValidAttributes()){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data parameters\"}").build();
 		}
 		else{
 			
@@ -30,11 +57,13 @@ public class ProductResource {
 			
 			productDao.save(product);
 			
-			String json = "{ result: Product successfully added with id = " + product.getProductId() + "}";
+			String json = "{ \"result\": \"Product successfully added with id = " + product.getProductId() + "\"}";
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}		
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@DELETE
 	@Path("/{id}")
@@ -48,15 +77,17 @@ public class ProductResource {
 		Product productObject = productDao.getProduct(id);
 		
 		if(productObject == null){
-			return Response.status(Response.Status.NO_CONTENT).entity("{result : ProductId does not exist}").build();
+			return Response.status(Response.Status.NO_CONTENT).entity("{\"result\" : \"ProductId does not exist\"}").build();
 		}
 		
 		productDao.delete(productObject);
 		
-		String json = "{ result: Product successfully deleted with id = " + id + "}";
+		String json = "{ \"result\": \"Product successfully deleted with id = " + id + "\"}";
 		
 		return Response.ok(json, MediaType.APPLICATION_JSON).build();	
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@POST
 	@Path("/{id}")
@@ -66,7 +97,7 @@ public class ProductResource {
 		
 		
 		if(!product.hasValidAttributes()){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data parameters\"}").build();
 		}
 		else{
 			
@@ -75,7 +106,7 @@ public class ProductResource {
 			Product productObject = productDao.getProduct(id);
 			
 			if(productObject == null){
-				return Response.status(Response.Status.NO_CONTENT).entity("{result : productId does not exist}").build();
+				return Response.status(Response.Status.NO_CONTENT).entity("{\"result\" : \"productId does not exist\"}").build();
 			}
 			
 			productObject.setDepartment(product.getDepartment());
@@ -87,7 +118,7 @@ public class ProductResource {
 				
 			productDao.save(productObject);
 			
-			String json = "{ result: Product successfully updated with id = " + productObject.getProductId() + "}";
+			String json = "{ \"result\": \"Product successfully updated with id = " + productObject.getProductId() + "\"}";
 						
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}	

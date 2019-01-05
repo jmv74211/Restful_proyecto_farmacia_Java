@@ -1,7 +1,12 @@
 package jmv74211.DSS_P4.resources.Users;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -16,7 +21,29 @@ import jmv74211.DSS_P4.models.Users.Customer;
 
 @Path("user")
 public class CustomerResource {
-	  	  
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@SuppressWarnings("unchecked")
+	@GET
+	@Produces( {MediaType.APPLICATION_JSON} )
+	@Consumes( {MediaType.APPLICATION_JSON} )
+	public ArrayList<Customer> getAllCustomers(){
+		
+		System.out.println("called getAllCustomers()");
+		
+		CustomerDao  customersDao = new CustomerDao();
+		
+		Query query = customersDao.query("SELECT a FROM Customer a");
+		
+		List<Customer> customerList = new ArrayList<Customer>();
+		customerList = query.getResultList();
+		
+		return (ArrayList<Customer>) customerList;
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
 	@PUT
 	@Produces( {MediaType.APPLICATION_JSON} )
 	@Consumes( {MediaType.APPLICATION_JSON} )
@@ -24,19 +51,21 @@ public class CustomerResource {
 		
 		
 		if(!customer.hasValidAttributes()){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data parameters\"}").build();
 		}
 		else{
 			CustomerDao customerDao = new CustomerDao();
 			
 			customerDao.save(customer);
 			
-			String json = "{ result: User successfully added with id = " + customer.getUserId() + "}";
+			String json = "{ \"result\": \"User successfully added with id = " + customer.getUserId() + "\"}";
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}	
 		
 	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@POST
 	@Path("/{id}")
@@ -46,7 +75,7 @@ public class CustomerResource {
 		
 		
 		if(!customer.hasValidAttributes()){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data parameters\"}").build();
 		}
 		else{
 			
@@ -55,7 +84,7 @@ public class CustomerResource {
 			Customer customerObject = customerDao.getCustomer(id);
 			
 			if(customerObject == null){
-				return Response.status(Response.Status.NO_CONTENT).entity("{result : CustomerId does not exist}").build();
+				return Response.status(Response.Status.NO_CONTENT).entity("{\"result\" : \"CustomerId does not exist\"}").build();
 			}
 			
 			customerObject.setName(customer.getName());
@@ -67,13 +96,15 @@ public class CustomerResource {
 			
 			customerDao.save(customerObject);
 			
-			String json = "{ result: User successfully updated with id = " + customerObject.getUserId() + "}";
+			String json = "{ \"result\": \"User successfully updated with id = " + customerObject.getUserId() + "\"}";
 			
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}	
 		
 	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@DELETE
 	@Path("/{id}")
@@ -87,12 +118,12 @@ public class CustomerResource {
 			Customer customerObject = customerDao.getCustomer(id);
 			
 			if(customerObject == null){
-				return Response.status(Response.Status.NO_CONTENT).entity("{result : CustomerId does not exist}").build();
+				return Response.status(Response.Status.NO_CONTENT).entity("{\"result\" : \"CustomerId does not exist\"}").build();
 			}
 			
 			customerDao.delete(customerObject);
 			
-			String json = "{ result: User successfully deleted with id = " + id + "}";
+			String json = "{ \"result\": \"User successfully deleted with id = " + id + "\"}";
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 					

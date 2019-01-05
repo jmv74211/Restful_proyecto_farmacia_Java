@@ -1,7 +1,12 @@
 package jmv74211.DSS_P4.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -17,6 +22,39 @@ import jmv74211.DSS_P4.models.ShippingCart;
 @Path("shippingCart")
 public class ShippingCartResource {
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@SuppressWarnings("unchecked")
+	@GET
+	@Produces( {MediaType.APPLICATION_JSON} )
+	@Consumes( {MediaType.APPLICATION_JSON} )
+	public String getAllShippingCart(){
+		
+		System.out.println("called getAllShippingCart()");
+		
+		ShippingCartDao  shippingCartDao = new ShippingCartDao();
+		
+		Query query = shippingCartDao.query("SELECT a FROM ShippingCart a");
+		
+		List<ShippingCart> shippingCartList = new ArrayList<ShippingCart>();
+		shippingCartList = query.getResultList();
+
+		String json="[";
+		
+		for(ShippingCart sc: shippingCartList){
+			
+			json += "{ \"cartId\" :" + sc.getCartId() + ", \"price\" : " + sc.getPrice() 
+			+ ", \"length\" : " + sc.getCustomer().getUserId() + " },";
+		}
+		
+		json = json.substring(0, json.length()-1);
+		json += "]";
+				
+		return json;
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@PUT
 	@Produces( {MediaType.APPLICATION_JSON} )
 	@Consumes( {MediaType.APPLICATION_JSON} )
@@ -37,6 +75,7 @@ public class ShippingCartResource {
 		}		
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@POST
 	@Path("/{id}")
@@ -69,6 +108,8 @@ public class ShippingCartResource {
 		}	
 		
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@DELETE
 	@Path("/{id}")

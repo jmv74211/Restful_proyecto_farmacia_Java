@@ -16,13 +16,21 @@
 		<class>jmv74211.DSS_P4.models.Purchase</class>
 		<class>jmv74211.DSS_P4.models.ShippingCart</class>
 		<class>jmv74211.DSS_P4.models.PharmacyProduct</class>
+		<class>jmv74211.DSS_P4.models.ShippingCartProduct</class>
 	
 		<properties>
 		
-			<property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
+		<property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
+        <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://104.45.16.127:3306/dss" />
+        <property name="javax.persistence.jdbc.user" value="dss" />
+		<property name="javax.persistence.jdbc.password" value="pwddss" />
+			
+		
+		
+			<!--<property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://127.0.0.1/dss" />
             <property name="javax.persistence.jdbc.user" value="dss" />
-			<property name="javax.persistence.jdbc.password" value="pwddss" />
+			<property name="javax.persistence.jdbc.password" value="pwddss" />-->
 		
 			<!--
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
@@ -34,7 +42,7 @@
 			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" /> -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB53Dialect" />
 	
-			<!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+			<!--<property name="hibernate.hbm2ddl.auto" value="create" /> -->
 		</properties>
 	</persistence-unit>
 

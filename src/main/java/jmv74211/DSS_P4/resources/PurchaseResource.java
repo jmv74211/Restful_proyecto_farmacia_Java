@@ -1,7 +1,12 @@
 package jmv74211.DSS_P4.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -15,15 +20,36 @@ import jmv74211.DSS_P4.models.Purchase;
 
 @Path("purchase")
 public class PurchaseResource {
-	
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@SuppressWarnings("unchecked")
+	@GET
+	@Produces( {MediaType.APPLICATION_JSON} )
+	@Consumes( {MediaType.APPLICATION_JSON} )
+	public ArrayList<Purchase> getAllPurchase(){
+		
+		System.out.println("called getAllPurchase()");
+		
+		PurchaseDao  purchaseDao = new PurchaseDao();
+		
+		Query query = purchaseDao.query("SELECT a FROM Purchase a");
+		
+		List<Purchase> purchaseList = new ArrayList<Purchase>();
+		purchaseList = query.getResultList();
+
+		return (ArrayList<Purchase>) purchaseList;
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@PUT
 	@Produces( {MediaType.APPLICATION_JSON} )
 	@Consumes( {MediaType.APPLICATION_JSON} )
 	public Response createPurchase(Purchase purchase){
 		
 		if(!purchase.hasValidAttributes()){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data parameters\"}").build();
 		}
 		else{
 			
@@ -31,11 +57,13 @@ public class PurchaseResource {
 			
 			purchaseDao.save(purchase);
 			
-			String json = "{ result: Purchase successfully added with id = " + purchase.getPurchaseId() + "}";
+			String json = "{ \"result\": \"Purchase successfully added with id = " + purchase.getPurchaseId() + "\"}";
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}		
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@POST
 	@Path("/{id}")
@@ -45,7 +73,7 @@ public class PurchaseResource {
 		
 		
 		if(!purchase.hasValidAttributes()){
-			return Response.status(Response.Status.BAD_REQUEST).entity("{result : Wrong data parameters}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"result\" : \"Wrong data parameters\"}").build();
 		}
 		else{
 			
@@ -54,7 +82,7 @@ public class PurchaseResource {
 			Purchase purchaseObject = purchaseDao.getPurchase(id);
 			
 			if(purchaseObject == null){
-				return Response.status(Response.Status.NO_CONTENT).entity("{result : purchaseId does not exist}").build();
+				return Response.status(Response.Status.NO_CONTENT).entity("{\"result\" : \"purchaseId does not exist\"}").build();
 			}
 			
 			purchaseObject.setDate(purchase.getDate());
@@ -64,12 +92,14 @@ public class PurchaseResource {
 			
 			purchaseDao.save(purchaseObject);
 			
-			String json = "{ result: Purchase successfully updated with id = " + purchaseObject.getPurchaseId() + "}";
+			String json = "{ \"result\": \"Purchase successfully updated with id = " + purchaseObject.getPurchaseId() + "\"}";
 						
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		}	
 		
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@DELETE
 	@Path("/{id}")
@@ -88,7 +118,7 @@ public class PurchaseResource {
 		
 		purchaseDao.delete(purchaseObject);
 		
-		String json = "{ result: Purchase successfully deleted with id = " + id + "}";
+		String json = "{ \"result\": \"Purchase successfully deleted with id = " + id + "\"}";
 		
 		return Response.ok(json, MediaType.APPLICATION_JSON).build();	
 	}		

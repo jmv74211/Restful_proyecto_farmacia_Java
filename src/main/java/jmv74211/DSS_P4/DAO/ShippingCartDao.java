@@ -1,6 +1,5 @@
 package jmv74211.DSS_P4.DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -11,9 +10,13 @@ import jmv74211.DSS_P4.models.ShippingCartProductPK;
 
 public class ShippingCartDao extends Dao<Integer,ShippingCart> {
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public ShippingCartDao(){
 		super();	
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void save(ShippingCart shippingCart){
 	
@@ -21,6 +24,8 @@ public class ShippingCartDao extends Dao<Integer,ShippingCart> {
 		this.persist(shippingCart);
 		
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void delete(ShippingCart shippingCart){
 		
@@ -34,6 +39,7 @@ public class ShippingCartDao extends Dao<Integer,ShippingCart> {
 		
 		ShippingCartProductDao shpDao = new ShippingCartProductDao();
 		
+		@SuppressWarnings("unchecked")
 		List<ShippingCartProduct>queryResult = query.getResultList();
 		
 		for(ShippingCartProduct sh: queryResult){
@@ -41,13 +47,18 @@ public class ShippingCartDao extends Dao<Integer,ShippingCart> {
 		}
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public ShippingCart getShippingCart(int id){
 		
 		return this.findById(id);
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public void updateShippingCart(ShippingCart shippingCart){
 		this.update(shippingCart);
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -1,6 +1,7 @@
 package jmv74211.DSS_P4.DAO;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,10 +28,10 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		this.entityManager = entityManagerFactory.createEntityManager();
 		
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-		  this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];	
-		  
-		  
+		  this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];	  
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void persist(E entity) { 
 		
@@ -44,6 +45,8 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		
 		//this.entityManager.close();
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	 
 	public void remove(E entity) { 
 		
@@ -58,6 +61,8 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		//this.entityManager.close();
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public E findById(K id) { 
 		
 		//this.entityManager = entityManagerFactory.createEntityManager();
@@ -69,6 +74,8 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		return object;
 	
 	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void update(E entity){
 		
@@ -84,6 +91,8 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public Query query(String queryText){
 		
 		//this.entityManager = entityManagerFactory.createEntityManager();
@@ -95,12 +104,25 @@ public abstract class Dao<K, E> implements DaoInterface<K,E> {
 		return query;	
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public boolean exist(K id){
 		
 		if(this.findById(id) == null)
 			return false;
 		
 		return true;
+	}
+	
+	public List<E> getData(){
+		
+		
+		String queryText = "SELECT a FROM " + this.entityClass.getSimpleName() + " a";
+		
+		//System.out.println(queryText);
+		Query query = this.entityManager.createQuery(queryText);
+
+		return query.getResultList();
 	}
 		
 }

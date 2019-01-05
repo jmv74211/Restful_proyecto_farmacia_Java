@@ -1,5 +1,7 @@
 package jmv74211.DSS_P4.models.Users;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,27 +13,39 @@ import jmv74211.DSS_P4.models.Pharmacy;
 
 @Entity
 @PrimaryKeyJoinColumn(name="userId")
-public class Manager extends User {
+public class Manager extends User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	@OneToOne(mappedBy = "manager", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
 	private Pharmacy pharmacyManaged;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public Manager() {
 		super();
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public Manager(String email, String password, String name, String surnames, String birthday) {
 		super(email, password, name, surnames, birthday);
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public Pharmacy getPharmacyManaged() {
 		return pharmacyManaged;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void setPharmacyManaged(Pharmacy pharmarcyManaged) {
 		this.pharmacyManaged = pharmarcyManaged;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public boolean hasValidAttributes(){
 	
@@ -44,6 +58,8 @@ public class Manager extends User {
 		else
 			return true;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
 	public String toString() {

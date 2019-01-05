@@ -1,20 +1,27 @@
 package jmv74211.DSS_P4.models.Users;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(name="userId")
-public class Customer extends User {
+public class Customer extends User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Column(name = "creditCardNumber")
 	private String creditCardNumber;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public Customer() {
 		super();
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public Customer(String email, String password, String name, String surnames, String birthday, String creditCardNumber) {
 		super(email, password, name, surnames, birthday);
@@ -22,13 +29,19 @@ public class Customer extends User {
 		this.creditCardNumber=creditCardNumber;
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public String getCreditCardNumber() {
 		return creditCardNumber;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void setCreditCardNumber(String creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public boolean hasValidAttributes(){
 		
@@ -41,6 +54,8 @@ public class Customer extends User {
 		else
 			return true;
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public String toString() {
