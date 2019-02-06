@@ -21,7 +21,7 @@
 		<properties>
 		
 		<property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
-        <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://104.45.16.127:3306/dss" />
+        <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://40.89.158.99:3306/dss" />
         <property name="javax.persistence.jdbc.user" value="dss" />
 		<property name="javax.persistence.jdbc.password" value="pwddss" />
 			
